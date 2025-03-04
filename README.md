@@ -10,7 +10,7 @@ Just add your own function in dllmain or select a proxied function to intercept.
 ``` python3 spoof.py
 usage: spoof.py [-h] dll_path
 
-Generate a C++ source file for a DLL that displays MessageBox for exported functions.
+Generate a C++ source file to either proxy or messageboxa
 
 positional arguments:
   dll_path    Path to the DLL to inspect and create the C++ source for.
