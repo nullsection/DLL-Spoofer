@@ -53,7 +53,7 @@ def generate_cpp_file(dll_path, output_cpp_file, exported_functions, messagebox)
 def main():
     
 
-    parser = argparse.ArgumentParser(description="Generate a C++ source file for a DLL that displays MessageBox for exported functions.")
+    parser = argparse.ArgumentParser(description="Generate a C++ source file to either proxy or messageboxa")
     parser.add_argument("dll_path", help="Path to the DLL to inspect and create the C++ source for.")
     parser.add_argument("--messagebox",action="store_true",default=False, help="If set, MessageBoxA all exports instead of proxy")
     args = parser.parse_args()
