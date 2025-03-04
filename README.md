@@ -1,8 +1,8 @@
 # DLL-Spoofer 
-This python script scans a provided DLL's exports and creates a basic duplicate CPP DLL template. All exported functions are re-used and pop a simple message window. 
-Additionally on DLL attach we execute the first exported function. This is useful for simple providing POC for DLL hijacking since we're not duping function arguements. 
+This python script scans a provided DLL's exports and creates a basic duplicate CPP DLL template. 
 
-This can easily be used to execute shellcode generated via msfvenom. Just replace the first function in the output template. 
+Two options, either export all the functions and pop MessageBoxA for DLL Hijacking POC or DLL proxy for persistence. 
+Just add your own function in dllmain or select a proxied function to intercept. 
 
 
 # Usage
@@ -17,7 +17,7 @@ positional arguments:
 
 optional arguments:
   -h, --help  show this help message and exit
-
+  --messagebox exports all functions and pops a MessageBoxA when called. Default: False
 ```
 
 ## Simply create a CPP DLL project, copy and paste the output file from the script. Build and profit???
@@ -26,6 +26,7 @@ Always appreciate a shout out in research if you use this!
 
 # Example 
 python .\spoof.py .\StateRepository.Core\StateRepository.Core.dll
+python .\spoof.py .\StateRepository.Core\StateRepository.Core.dll --messagebox
 
 --> ExportedFunctions.cpp
 ```
@@ -86,7 +87,6 @@ __declspec(dllexport) void sqlite3_win32_write_debug() {
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
     switch (ul_reason_for_call) {
     case DLL_PROCESS_ATTACH:
-		sqlite3_aggregate_context();
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
