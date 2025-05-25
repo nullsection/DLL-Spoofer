@@ -16,14 +16,14 @@ def generate_cpp_file(dll_path, output_cpp_file, exported_functions, messagebox)
     with open(output_cpp_file, "w") as cpp_file:
         dll_no_ext = os.path.splitext(os.path.basename(dll_path))[0]
         cpp_file.write("// dllmain.cpp : Defines the entry point for the DLL application.\n")
-        cpp_file.write("#include \"pch.h\"\n")
+        #cpp_file.write("#include \"pch.h\"\n")
         cpp_file.write("#include <iostream>\n")
         cpp_file.write("#include <Windows.h>\n")
         cpp_file.write("#include <windows.h>\n\n")
         
         if not messagebox:
             for func_name in exported_functions:
-                cpp_file.write(f'#pragma comment(linker, "/export{func_name}={dll_no_ext}.{func_name}")\n')
+                cpp_file.write(f'#pragma comment(linker, "/export:{func_name}={dll_no_ext}.{func_name}")\n')
                 cpp_file.write("\n")
         else:
             cpp_file.write("extern \"C\" {\n\n")
